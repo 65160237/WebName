@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Click Next</title>
+    <!-- ========= CSS =========-->
+    <link rel="stylesheet" href="style.css">
+    <!-- ========= Boxicon=========-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- ========= jQuery =========-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="" alt="logo">
+                </span>
+            </div>
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-links">
+            <div class="menu">
+                <li class="search-box">
+                    <i class='bx bxs-search icon'></i>
+                    <input type="search" placeholder="Search...">
+                </li>
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">แดชบอร์ด</span>
+                        </a>
+                    </li>
+                    <li class="nav-link form-menu">
+                        <a href="#">
+                            <i class='bx bxs-food-menu icon'></i>
+                            <span class="text nav-text">ฟอร์ม</span>
+                            <i class='bx bx-chevron-down right-icon' style="font-size: 14px;"></i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="#">
+                                    <i class='bx bx-chevron-right left-icon'></i>
+                                    <span class="text nav-text">สร้างฟอร์มรับสมัคร</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class='bx bx-chevron-right left-icon'></i>
+                                    <span class="text nav-text">ฟอร์มของฉัน</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-info-circle icon'></i>
+                            <span class="text nav-text">ข้อมูล</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bxs-log-out icon'></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+                <li class="mode">
+                    <div class="moon-sun">
+                        <i class='bx bxs-moon icon'></i>
+                        <i class='bx bxs-sun icon'></i>
+                    </div>
+                    <span class="mode-text text">Dark Mode</span>
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+    </nav>
+
+    <script>
+        $(document).ready(function () {
+            $(".form-menu").click(function () {
+                $(this).toggleClass("active");
+                $(this).find(".sub-menu").slideToggle();
+            });
+        });
+    </script>
+</body>
+
+</html>
