@@ -1,4 +1,3 @@
-/* Google Font Import Poppins */
 @import url('https://fonts.googleapis.com/css?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 * {
@@ -48,12 +47,24 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-
     height: 100%;
     width: 250px;
-
     padding: 10px 14px;
     background: var(--sidebar-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.3s ease;
+    /* เพิ่ม transition เมื่อมีการเปลี่ยนขนาดของ sidebar */
+    z-index: 100;
+}
+
+.sidebar.close {
+    width: 78px;
+}
+
+.sidebar.close .text {
+    opacity: 0;
 }
 
 /* ====== Resuable Css ====== */
@@ -61,12 +72,22 @@ body {
     font-size: 16px;
     font-weight: 500;
     color: var(--text-color);
+    transition: var(--tran-03);
+    white-space: nowrap;
+    opacity: 1;
 }
 
 .sidebar.image {
     min-width: 60px;
     display: flex;
     align-items: center;
+}
+
+.sidebar .image img {
+    max-width: 90%;
+    /* ขนาดภาพจะไม่ใหญ่เกินขนาดของพื้นที่ที่กำหนด */
+    max-height: 90%;
+    /* ขนาดภาพจะไม่ใหญ่เกินขนาดของพื้นที่ที่กำหนด */
 }
 
 .sidebar li {
@@ -95,14 +116,12 @@ body {
     position: relative;
 }
 
-.sidebar.image-text img {
-    width: 40px;
-    border-radius: 6px;
-}
-
-.sidebar header .image-text {
+.sidebar .image {
     display: flex;
+    justify-content: center;
+    /* จัดให้โลโก้อยู่ตรงกลางแนวนอน */
     align-items: center;
+    /* จัดให้โลโก้อยู่ตรงกลางแนวตั้ง */
 }
 
 header .image-text .header-text {
@@ -170,7 +189,7 @@ header .image-text .header-text {
     transform: translateY(-50%);
 }
 
-.menu .sub-menu {
+.menu .sleft-icon {
     display: none;
     margin-left: 20px;
     padding-left: 20px;
@@ -178,7 +197,153 @@ header .image-text .header-text {
     border-left: 1px solid #f6f6f6;
 }
 
-.sub-menu li a {
+.left-icon li a {
     padding: 10px 8px;
     font-size: 12px;
+}
+
+.sidebar .menu-bar {
+
+    height: calc(100% - 50px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-bar .mode {
+    background: var(--primary-color-light);
+}
+
+.menu-bar .mode i {
+    position: absolute;
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.bottom-content {
+    margin-top: auto;
+}
+
+.home {
+    position: relative;
+    /* กำหนดตำแหน่งให้อยู่แบบ relative */
+    height: 100vh;
+    /* กำหนดความสูงให้เต็มหน้าจอ */
+    left: 250px;
+    /* กำหนดตำแหน่งจากด้านซ้าย 250px */
+    width: calc(100% - 250px);
+    /* กำหนดความกว้างโดยคำนวณจากความกว้างทั้งหมดของหน้าเว็บ ลบด้วย 250px */
+    background: var(--body-color);
+    /* กำหนดสีพื้นหลังเป็นสีแดง */
+    transition: var(--tran-05);
+    /* กำหนด transition effect */
+}
+
+.home.text {
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 50px;
+}
+
+/* กำหนดสไตล์สำหรับ element 'home' เมื่อ sidebar ปิด */
+.sidebar.close~.home {
+    left: 88px;
+    /* กำหนดตำแหน่งจากด้านซ้าย 88px */
+    width: calc(100% - 88px);
+    /* กำหนดความกว้างโดยคำนวณจากความกว้างทั้งหมดของหน้าเว็บ ลบด้วย 88px */
+}
+
+.top-bar {
+    height: 50px;
+    /* กำหนดความสูงของแถบ */
+    background-color: var(--primary-color);
+    /* กำหนดสีพื้นหลัง */
+    width: 100%;
+    /* กำหนดความกว้างให้เต็มหน้าจอ */
+    position: fixed;
+    /* ตั้งค่าให้ติดด้านบนของหน้าจอ */
+    top: 0;
+    /* ติดด้านบน */
+    z-index: 999;
+    /* ให้แสดงทับเหนือเนื้อหาอื่น */
+}
+
+.chart-header {
+    background-color: #f00;
+    height: 50px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.chart-header .title {
+    float: left;
+    color: #fff;
+}
+
+.history {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.history h2 {
+    color: #333333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.history p {
+    color: #555555;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.history ul {
+    color: #555555;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.history ul li {
+    margin-bottom: 5px;
+}
+
+/* เพิ่ม CSS เพื่อปรับแต่งสไลด์บาร์เมื่อหน้าลดลงมา */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    /* ขยับแถบบนไปด้านขวาเท่ากับความกว้างของ sidebar */
+    right: 0;
+    height: 50px;
+    background-color: var(--primary-color);
+    z-index: 999;
+    transition: left 0.3s ease;
+    /* เพิ่ม transition เพื่อให้มีการเคลื่อนไหวเมื่อสไลด์บาร์เปิดหรือปิด */
+}
+
+/* เพิ่ม CSS เมื่อสไลด์บาร์ปิด */
+.sidebar.close~.top-bar {
+    left: 78px;
+    /* ขยับแถบบนไปด้านขวาเมื่อ sidebar ปิด */
 }

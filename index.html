@@ -5,29 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Click Next</title>
+    <title>ระบบรับสมัครนักศึกษา</title>
     <!-- ========= CSS =========-->
     <link rel="stylesheet" href="style.css">
     <!-- ========= Boxicon=========-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- ========= jQuery =========-->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector(".sidebar"),
+                body = document.querySelector("body"),
+                toggle = body.querySelector(".toggle"),
+                searchBtn = body.querySelector(".search-box"),
+                modeText = document.querySelector(".mode-text");
 
-    <style>
-        /* Your CSS styles here */
-    </style>
+            toggle.addEventListener("click", () => {
+                sidebar.classList.toggle("close");
+                toggle.classList.toggle("bx-chevron-right");
+                toggle.classList.toggle("bx-chevron-left");
+            });
+
+            searchBtn.addEventListener("click", () => {
+                sidebar.classList.remove("close");
+            });
+
+            modeSwitch.addEventListener("click", () => {
+                body.classList.toggle("dark");
+
+                if (body.classList.contains("dark")) {
+                    modeText.innerText = "Light Mode";
+                } else {
+                    modeText.innerText = "Dark Mode";
+                }
+            });
+        });
+    </script>
+
 </head>
 
 <body>
+    <div class="chart-header">
+    </div>
     <nav class="sidebar">
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="" alt="logo">
+                    <img src="logo.png" alt="logo">
                 </span>
+                <div class="header-text">
+                </div>
             </div>
             <i class='bx bx-chevron-right toggle'></i>
+
         </header>
 
         <div class="menu-links">
@@ -39,7 +69,7 @@
                 <ul class="menu-links">
                     <li class="nav-link">
                         <a href="#">
-                            <i class='bx bxs-dashboard icon'></i>
+                            <i class='bx bx-line-chart icon'></i>
                             <span class="text nav-text">แดชบอร์ด</span>
                         </a>
                     </li>
@@ -49,20 +79,17 @@
                             <span class="text nav-text">ฟอร์ม</span>
                             <i class='bx bx-chevron-down right-icon' style="font-size: 14px;"></i>
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">
-                                    <i class='bx bx-chevron-right left-icon'></i>
-                                    <span class="text nav-text">สร้างฟอร์มรับสมัคร</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class='bx bx-chevron-right left-icon'></i>
-                                    <span class="text nav-text">ฟอร์มของฉัน</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">ฟอร์มรับสมัคร</span>
+                        </a>
+                    </li>
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-food-menu icon'></i>
+                            <span class="text nav-text">ฟอร์มของฉัน</span>
+                        </a>
                     </li>
                     <li class="nav-link">
                         <a href="#">
@@ -72,35 +99,47 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="bottom-content">
+        </div>
+        </div>
+        <div class="bottom-content">
+            <ul>
                 <li class="">
                     <a href="#">
                         <i class='bx bxs-log-out icon'></i>
                         <span class="text nav-text">Logout</span>
                     </a>
                 </li>
-                <li class="mode">
-                    <div class="moon-sun">
-                        <i class='bx bxs-moon icon'></i>
-                        <i class='bx bxs-sun icon'></i>
-                    </div>
-                    <span class="mode-text text">Dark Mode</span>
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-            </div>
-    </nav>
 
-    <script>
-        $(document).ready(function () {
-            $(".form-menu").click(function () {
-                $(this).toggleClass("active");
-                $(this).find(".sub-menu").slideToggle();
-            });
-        });
-    </script>
+            </ul>
+        </div>
+    </nav>
+    <section class="home">
+        <div class="history">
+            <h2>ประวัติข้อมูล</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <select class="form-control" id="ลักษณะงาน" name="ลักษณะงาน">
+                            <option value="ลักษณะงาน">ลักษณะงาน </option>
+                            <option value="สมัครงาน">สมัครงาน</option>
+                            <option value="สหกิจศึกษา">สหกิจศึกษา</option>
+                        </select>
+                        <select class="form-control" id="ตำแหน่งงาน" name="ตำแหน่งงาน">
+                            <option value="ตำแหน่งงาน">ตำแหน่งงาน</option>
+                            <option value="Developer">Developer</option>
+                            <option value="Programmer">Programmer</option>
+                            <option value="Tester">Tester</option>
+                            <option value="System Analyst">System Analyst</option>
+                            <option value="Fullstack Developer">Fullstack Developer</option>
+                            <option value="Frontend Developer">Frontend Developer</option>
+                            <option value="Backend Developer">Backend Developer</option>
+                            <option value="Ui Design">Ui Design</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

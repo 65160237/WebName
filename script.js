@@ -1,14 +1,24 @@
-$(".menu > ul > li").click(function (e) {
-  // remove active from already active
-  $(this).siblings().removeClass("active");
+const sidebar = document.querySelector(".sidebar"),
+      body = document.querySelector("body"),
+      toggle = body.querySelector(".toggle"),
+      searchBtn = body.querySelector(".search-box"),
+      modeSwtich = body.querySelector(".mode-switch"),
+      modeText = body.querySelector(".mode-text");
 
-  // add active to Clicked
-  $(this).toggleClass("active");
+toggle.addEventListener("click", () => {
+  sidebar.classList.toggle("close");
+});
 
-  //if has sub menu open it
-  if ($(this).find("ul").length > 0) {
-    $(this).find("ul").slideToggle();
+searchBtn.addEventListener("click", () => {
+  sidebar.classList.remove("close");
+});
+
+modeSwtich.addEventListener("click", () => {
+  body.classList.toggle("dark");
+
+  if (body.classList.contains("dark")) {
+    modeText.innerText = "Light Mode";
+  } else {
+    modeText.innerText = "Dark Mode";
   }
-
-  //open
 });
