@@ -190,6 +190,10 @@ a.sidebar-link:hover {
     width: 40px;
 }
 
-
+.sidebar-item.active a.sidebar-link {
+    background-color: red;
+    color: white;
+    border-left: 3px solid #3b7ddd;
+}
 
 @media (min-width: 768px) {}
