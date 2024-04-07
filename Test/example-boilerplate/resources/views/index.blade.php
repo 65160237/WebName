@@ -6,93 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Table</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table th,
-        table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        table th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .action-buttons a {
-            display: inline-block;
-            padding: 6px 12px;
-            text-decoration: none;
-            color: white;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        .action-buttons .btn-primary {
-            background-color: #007bff;
-            border: 1px solid #007bff;
-        }
-
-        .action-buttons .btn-danger {
-            background-color: #dc3545;
-            border: 1px solid #dc3545;
-        }
-
-        .add-link {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-    </style>
+    <!-- เพิ่มลิงก์ไปยัง Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
         <h1>Student Table</h1>
         <a href="{{ url('add-student') }}" class="add-link">Add Student</a>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th scope="col">
+                        <div class="dropdown">
+                            <button class="btn btn-white dropdown-toggle" type="button" id="statusDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Name
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                                <li><a class="dropdown-item" href="#">ทำไรกิน</a></li>
+                                <li><a class="dropdown-item" href="#">Vikrom Sawasdee</a></li>
+                                <li><a class="dropdown-item" href="#">All</a></li>
+                            </ul>
+                        </div>
+                    </th>
                     <th>Email</th>
-                    <th>Major</th>
-                    <th>Action</th>
+                    <th scope="col">
+                        <div class="dropdown">
+                            <button class="btn btn-white dropdown-toggle" type="button" id="statusDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Major
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="statusDropdown">
+                                <li><a class="dropdown-item" href="#">SE</a></li>
+                                <li><a class="dropdown-item" href="#">AE</a></li>
+                                <li><a class="dropdown-item" href="#">All</a></li>
+                            </ul>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
+                <!-- วน loop ผ่านข้อมูลของนักเรียน -->
                 @foreach ($student as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
@@ -101,11 +58,10 @@
                         <td>{{ $item->major }}</td>
                         <td>
                             <a href="{{ url('edit-student/' . $item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <form method="POST" action = "{{ url('delete-student/' . $item->id) }} ">
+                            <form method="POST" action="{{ url('delete-student/' . $item->id) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit">Delete</button>
-
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -113,6 +69,73 @@
             </tbody>
         </table>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const selectedMajor = item.textContent; // Get the selected major
+                    const tableRows = document.querySelectorAll(
+                        'tbody tr'); // Get all rows in the table
+
+                    tableRows.forEach(function(row) {
+                        const majorCell = row.querySelector(
+                            'td:nth-child(4)'); // Find the cell storing major
+                        const major = majorCell.textContent
+                            .trim(); // Get the major in that row
+
+                        if (selectedMajor === 'All' || major === selectedMajor) {
+                            row.style.display =
+                                ''; // Show the row if it matches the selected major or 'All' is selected
+                        } else {
+                            row.style.display = 'none'; // Otherwise, hide the row
+                        }
+                    });
+                    tableRows.forEach(function(row) {
+                        const nameCell = row.querySelector(
+                            'td:nth-child(4)'); // Find the cell storing major
+                        const name = nameCell.textContent
+                            .trim(); // Get the major in that row
+
+                        if (selectedname === 'All' || name === selectedMajor) {
+                            row.style.display =
+                                ''; // Show the row if it matches the selected major or 'All' is selected
+                        } else {
+                            row.style.display = 'none'; // Otherwise, hide the row
+                        }
+                    });
+                });
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+
+            dropdownItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const selectedMajor = item.textContent.trim(); // Get the selected major
+                    const tableRows = document.querySelectorAll(
+                        'tbody tr'); // Get all rows in the table
+
+                    tableRows.forEach(function(row) {
+                        const nameCell = row.querySelector(
+                            'td:nth-child(2)'); // Find the cell storing name
+                        const name = nameCell.textContent
+                            .trim(); // Get the name in that row
+
+                        if (selectedMajor === 'All' || name === selectedMajor) {
+                            row.style.display =
+                                ''; // Show the row if it matches the selected name or 'ทำไรกิน' is selected
+                        } else {
+                            row.style.display = 'none'; // Otherwise, hide the row
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>
