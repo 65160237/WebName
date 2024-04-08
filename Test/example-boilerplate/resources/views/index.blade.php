@@ -28,7 +28,6 @@
                             <ul class="dropdown-menu" aria-labelledby="statusDropdown">
                                 <li><a class="dropdown-item" href="#">ทำไรกิน</a></li>
                                 <li><a class="dropdown-item" href="#">Vikrom Sawasdee</a></li>
-                                <li><a class="dropdown-item" href="#">All</a></li>
                             </ul>
                         </div>
                     </th>
@@ -93,19 +92,6 @@
                             row.style.display = 'none'; // Otherwise, hide the row
                         }
                     });
-                    tableRows.forEach(function(row) {
-                        const nameCell = row.querySelector(
-                            'td:nth-child(4)'); // Find the cell storing major
-                        const name = nameCell.textContent
-                            .trim(); // Get the major in that row
-
-                        if (selectedname === 'All' || name === selectedMajor) {
-                            row.style.display =
-                                ''; // Show the row if it matches the selected major or 'All' is selected
-                        } else {
-                            row.style.display = 'none'; // Otherwise, hide the row
-                        }
-                    });
                 });
             });
         });
@@ -126,7 +112,7 @@
 
                         if (selectedMajor === 'All' || name === selectedMajor) {
                             row.style.display =
-                                ''; // Show the row if it matches the selected name or 'ทำไรกิน' is selected
+                                ''; // Show the row if it matches the selected name or 'All' is selected
                         } else {
                             row.style.display = 'none'; // Otherwise, hide the row
                         }
